@@ -41,6 +41,7 @@ module Conditnio
     get '/callback/:callback/:token' do
       sighting = Sighting.find_by_token(params[:token])
 
+      content_type 'text/javascript', :charset => 'utf-8'
       if sighting.nil?
         Sighting.create(token: params[:token])
         "#{params[:callback]}()"
