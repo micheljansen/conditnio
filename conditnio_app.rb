@@ -39,8 +39,11 @@ module Conditnio
     end
 
     get '/callback/:callback/:token' do
-      Sighting.find_or_create_by_token(params[:token])
-      if true
+      p params[:token]
+      sighting = Sighting.find_by_token(params[:token])
+
+      if sighting.nil?
+        Sighting.create(token: params[:token])
         "#{params[:callback]}()"
       else
         ""
