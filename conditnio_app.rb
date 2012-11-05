@@ -39,7 +39,6 @@ module Conditnio
     end
 
     get '/callback/:callback/:token' do
-      p params[:token]
       sighting = Sighting.find_by_token(params[:token])
 
       if sighting.nil?
