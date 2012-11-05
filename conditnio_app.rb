@@ -1,11 +1,13 @@
 #encoding utf-8
 
+require 'uri'
+
 require 'bundler'
 Bundler.require
 
-require 'uri'
-
 require 'sinatra/reloader' if development?
+
+require "./models/sighting"
 
 module Conditnio
   class App < Sinatra::Base
@@ -34,6 +36,15 @@ module Conditnio
         :database => db.path[1..-1],
         :encoding => 'utf8'
       )
+    end
+
+    get '/callback/:callback/:token' do
+      Sighting.find_or_create_by_token(params[:token])
+      if true
+        "#{params[:callback]}()"
+      else
+        ""
+      end
     end
 
   end
