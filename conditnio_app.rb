@@ -29,7 +29,11 @@ module Conditnio
         Sighting.create(token: params[:token])
         "#{params[:callback]}()"
       else
-        ""
+        if development?
+          "/* #{sighting.to_yaml} */"
+        else
+          ""
+        end
       end
     end
 
