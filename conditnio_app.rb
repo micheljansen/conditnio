@@ -14,6 +14,7 @@ module Conditnio
     register Sinatra::ActiveRecordExtension
 
     configure :development do
+      register Sinatra::Reloader
       set :database, 'sqlite:///development.db'
     end
 
